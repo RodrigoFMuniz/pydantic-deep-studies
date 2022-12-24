@@ -189,3 +189,18 @@
     # return
 
     {'first_name': 'Foo', 'last_name': None, 'age': None}
+
+### Common Serialization
+
+    if __name__=="__main__":
+
+        try:
+            p1 = Person(first_name="Foo", last_name="Boo",age=100)
+            print(p1.dict(exclude={'first_name', 'age'}))
+
+        except ValidationError as err:
+            print(err)
+
+
+    # return
+    {'last_name': 'Boo'}
