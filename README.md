@@ -190,7 +190,7 @@
 
     {'first_name': 'Foo', 'last_name': None, 'age': None}
 
-### Common Serialization
+### Dict Serialization
 
     if __name__=="__main__":
 
