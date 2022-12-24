@@ -12,5 +12,7 @@ if __name__=="__main__":
         p1 = Person(first_name="Foo", last_name="Boo", age="error")
     
     except ValidationError as err:
-        print(err)
+        # print(err)
+        print(err.json())
+
 
