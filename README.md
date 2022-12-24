@@ -219,3 +219,22 @@
 
     # return
     {"first_name": "Foo", "age": 100}
+
+### Json Serialization with indentation
+
+    if __name__=="__main__":
+
+        try:
+            p1 = Person(first_name='Foo', last_name="Boo",age=100)
+            print(p1.json(include={'first_name', 'age'}, indent=4))
+
+        except ValidationError as err:
+            print(err)
+
+
+    # return
+
+    {
+        "first_name": "Foo",
+        "age": 100
+    }
