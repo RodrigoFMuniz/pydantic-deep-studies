@@ -158,7 +158,7 @@
 
     class Person(BaseModel):
         first_name:str
-        last_name:Optional[Union[str,None]] # using Optional + Union
+        last_name:Optional[Union[str,None]] # using Optional + Union ||| or just Optional[str]
         age:int | None # Using 3.10+ feature "pipe"
 
 
@@ -170,3 +170,7 @@
 
         except ValidationError as err:
             print(err)
+
+    # return
+
+    first_name='Foo' last_name=None age=None
