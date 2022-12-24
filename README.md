@@ -124,3 +124,49 @@
 
 
     [{'loc': ('age',), 'msg': 'value is not a valid integer', 'type': 'type_error.integer'}]
+
+### Missing parameters
+
+    from pydantic import BaseModel, ValidationError
+
+    class Person(BaseModel):
+        first_name:str
+        last_name:str
+        age:int
+
+
+    if __name__=="__main__":
+
+        try:
+            p1 = Person(first_name="Foo")
+
+        except ValidationError as err:
+            print(err)
+
+    # return
+
+    2 validation errors for Person
+    last_name
+    field required (type=value_error.missing)
+    age
+    field required (type=value_error.missing)
+
+### Optional parameters
+
+    from pydantic import BaseModel, ValidationError
+    from typing import Optional, Union
+
+    class Person(BaseModel):
+        first_name:str
+        last_name:Optional[Union[str,None]] # using Optional + Union
+        age:int | None # Using 3.10+ feature "pipe"
+
+
+    if __name__=="__main__":
+
+        try:
+            p1 = Person(first_name="Foo")
+            print(p1)
+
+        except ValidationError as err:
+            print(err)
