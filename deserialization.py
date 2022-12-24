@@ -9,6 +9,15 @@ class Person(BaseModel):
     date_of_birth: date
 
 
+data_json = """
+{
+    "first_name": "Guilhermo,
+    "last_name": "Van Helsing",
+    "age": 28,
+    "date_of_birth": date(1992,10,10)
+}
+"""
+
 if __name__=="__main__":
 
     try:
