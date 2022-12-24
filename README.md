@@ -174,3 +174,18 @@
     # return
 
     first_name='Foo' last_name=None age=None
+
+### Returning a dict
+
+    if __name__=="__main__":
+
+        try:
+            p1 = Person(first_name="Foo")
+            print(p1.dict())
+
+        except ValidationError as err:
+            print(err)
+
+    # return
+
+    {'first_name': 'Foo', 'last_name': None, 'age': None}
