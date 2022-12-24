@@ -13,6 +13,7 @@ if __name__=="__main__":
     
     except ValidationError as err:
         # print(err)
-        print(err.json())
+        # print(err.json()
+        print(err.errors())
 
 
