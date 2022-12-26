@@ -38,8 +38,9 @@ if __name__=="__main__":
       p = Person.parse_obj(data_dict2)
       p2 = Person(firstName="Newton",lastName="Isaac",  age=1000,dateOfBirth="1788-10-10")
       print(p2.json())
-      p2_dict = p2.json()
-      p2_des = Person.parse_raw(p2_dict)
+      print(p2.dict())
+      p2_json = p2.json()
+      p2_des = Person.parse_raw(p2_json)
       print(p2_des)
     
     except ValidationError as err:
