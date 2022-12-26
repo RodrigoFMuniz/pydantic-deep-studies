@@ -31,6 +31,7 @@ data_dict2 = {
     "age": 28,
     "dateOfBirth": date(1992,10,10)
 }
+data_junk = {**data_dict2,"junk":"data"}
 
 if __name__=="__main__":
 
@@ -45,6 +46,10 @@ if __name__=="__main__":
       p2_json = p3.json()
       p2_des = Person.parse_raw(p2_json)
       print(p2_des)
+
+      print('-------------------------')
+      print(data_junk)
+      print(Person.parse_obj(data_junk))
     
     except ValidationError as err:
         print(err.json())

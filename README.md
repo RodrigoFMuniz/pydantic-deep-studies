@@ -392,3 +392,27 @@
     {'first_name': 'George', 'last_name': 'Washington', 'age': 80, 'date_of_birth': datetime.date(1860, 10, 10)}    
     {'firstName': 'George', 'lastName': 'Washington', 'age': 80, 'dateOfBirth': datetime.date(1860, 10, 10)}        
     first_name='George' last_name='Washington' age=80 date_of_birth=datetime.date(1860, 10, 10)
+
+
+### Deafault behavior - extra data
+
+    data_dict2 = {
+        "firstName": "Guilhermo",
+        "lastName": "Van Helsing",
+        "age": 28,
+        "dateOfBirth": date(1992,10,10)
+    }
+    data_junk = {**data_dict2,"junk":"data"}
+
+    if __name__=="__main__":
+
+        try:
+            print(data_junk)
+            print(Person.parse_obj(data_junk))
+        
+        except ValidationError as err:
+            print(err.json())
+
+    # return 
+    {'firstName': 'Guilhermo', 'lastName': 'Van Helsing', 'age': 28, 'dateOfBirth': datetime.date(1992, 10, 10), 'junk': 'data'}
+    first_name='Guilhermo' last_name='Van Helsing' age=28 date_of_birth=datetime.date(1992, 10, 10)
