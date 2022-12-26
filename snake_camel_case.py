@@ -37,9 +37,12 @@ if __name__=="__main__":
     try:
       p = Person.parse_obj(data_dict2)
       p2 = Person(firstName="Newton",lastName="Isaac",  age=1000,dateOfBirth="1788-10-10")
-      print(p2.json())
-      print(p2.dict())
-      p2_json = p2.json()
+      p3 = Person(first_name = "George", last_name="Washington",age=80, date_of_birth='1860-10-10')
+      print(p3.json())
+      print(p3.json(by_alias=True))
+      print(p3.dict())
+      print(p3.dict(by_alias=True))
+      p2_json = p3.json()
       p2_des = Person.parse_raw(p2_json)
       print(p2_des)
     

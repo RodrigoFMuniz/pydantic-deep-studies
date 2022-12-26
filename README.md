@@ -364,3 +364,31 @@
     # return 
     {"first_name": "Newton", "last_name": "Isaac", "age": 1000, "date_of_birth": "1788-10-10"}
     first_name='Newton' last_name='Isaac' age=1000 date_of_birth=datetime.date(1788, 10, 10)
+
+
+### Calling attributes by alias 
+
+    if __name__=="__main__":
+
+        try:
+        p = Person.parse_obj(data_dict2)
+        p2 = Person(firstName="Newton",lastName="Isaac",  age=1000,dateOfBirth="1788-10-10")
+        p3 = Person(first_name = "George", last_name="Washington",age=80, date_of_birth='1860-10-10')
+        print(p3.json())
+        print(p3.json(by_alias=True))
+        print(p3.dict())
+        print(p3.dict(by_alias=True))
+        p2_json = p3.json()
+        p2_des = Person.parse_raw(p2_json)
+        print(p2_des)
+        
+        except ValidationError as err:
+            print(err.json())
+
+    # return
+
+    {"first_name": "George", "last_name": "Washington", "age": 80, "date_of_birth": "1860-10-10"}
+    {"firstName": "George", "lastName": "Washington", "age": 80, "dateOfBirth": "1860-10-10"}
+    {'first_name': 'George', 'last_name': 'Washington', 'age': 80, 'date_of_birth': datetime.date(1860, 10, 10)}    
+    {'firstName': 'George', 'lastName': 'Washington', 'age': 80, 'dateOfBirth': datetime.date(1860, 10, 10)}        
+    first_name='George' last_name='Washington' age=80 date_of_birth=datetime.date(1860, 10, 10)
