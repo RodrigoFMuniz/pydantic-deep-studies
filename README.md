@@ -394,7 +394,7 @@
     first_name='George' last_name='Washington' age=80 date_of_birth=datetime.date(1860, 10, 10)
 
 
-### Deafault behavior - extra data
+### Default behavior - extra data
 
     data_dict2 = {
         "firstName": "Guilhermo",
@@ -409,6 +409,8 @@
         try:
             print(data_junk)
             print(Person.parse_obj(data_junk))
+            print(hasattr(p4,"first_name"))
+            print(hasattr(p4,"junk"))# because It has been ignored by pydantic
         
         except ValidationError as err:
             print(err.json())
@@ -416,3 +418,35 @@
     # return 
     {'firstName': 'Guilhermo', 'lastName': 'Van Helsing', 'age': 28, 'dateOfBirth': datetime.date(1992, 10, 10), 'junk': 'data'}
     first_name='Guilhermo' last_name='Van Helsing' age=28 date_of_birth=datetime.date(1992, 10, 10)
+    True
+    False
+
+### Changing the behavior above
+
+    from pydantic import BaseModel,ValidationError, Field, Extra
+    from typing import Optional, Union
+    from datetime import date
+
+    class Person(BaseModel):
+        first_name:str = Field(default=None, alias="firstName")
+        last_name:Optional[Union[str,None]] = Field(alias="lastName")
+        age:int | None
+        date_of_birth: date = Field(default= None,alias="dateOfBirth")
+
+        class Config:
+        allow_population_by_field_name = True
+        extra=Extra.allow
+
+
+    print(data_junk)
+    print(Person.parse_obj(data_junk))
+    p4 = Person(**data_junk)
+    print(hasattr(p4,"first_name"))
+    print(hasattr(p4,"junk"))# because It has been ignored by pydantic
+
+    # Return
+
+    {'firstName': 'Guilhermo', 'lastName': 'Van Helsing', 'age': 28, 'dateOfBirth': datetime.date(1992, 10, 10), 'junk': 'data'}
+    first_name='Guilhermo' last_name='Van Helsing' age=28 date_of_birth=datetime.date(1992, 10, 10) junk='data'     
+    True
+    True

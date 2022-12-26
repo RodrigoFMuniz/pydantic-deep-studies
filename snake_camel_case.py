@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, ValidationError, Field, Extra
 from typing import Optional, Union
 from datetime import date
 
@@ -10,6 +10,7 @@ class Person(BaseModel):
 
     class Config:
       allow_population_by_field_name = True
+      extra=Extra.allow
 
 data_json = '''
 {
@@ -50,6 +51,9 @@ if __name__=="__main__":
       print('-------------------------')
       print(data_junk)
       print(Person.parse_obj(data_junk))
+      p4 = Person(**data_junk)
+      print(hasattr(p4,"first_name"))
+      print(hasattr(p4,"junk"))# because It has been ignored by pydantic
     
     except ValidationError as err:
         print(err.json())
