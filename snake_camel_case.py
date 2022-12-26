@@ -8,6 +8,9 @@ class Person(BaseModel):
     age:int | None
     date_of_birth: date = Field(default= None,alias="dateOfBirth")
 
+    class Config:
+      allow_population_by_field_name = True
+
 data_json = '''
 {
     "first_name": "Guilhermo",
