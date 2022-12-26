@@ -347,3 +347,20 @@
 
     # return 
     first_name=None last_name=None age=1000 date_of_birth=None
+
+
+### After using Config class to enable features
+
+    class Person(BaseModel):
+        first_name:str = Field(default=None, alias="firstName")
+        last_name:Optional[Union[str,None]] = Field(alias="lastName")
+        age:int | None
+        date_of_birth: date = Field(default= None,alias="dateOfBirth")
+
+        class Config:
+        allow_population_by_field_name = True
+    
+
+    # return 
+    {"first_name": "Newton", "last_name": "Isaac", "age": 1000, "date_of_birth": "1788-10-10"}
+    first_name='Newton' last_name='Isaac' age=1000 date_of_birth=datetime.date(1788, 10, 10)
